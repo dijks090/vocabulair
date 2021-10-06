@@ -1,14 +1,9 @@
-{
-  "duits": [
-    {"nl": "de vakantie", "vr": "der Urlaub"},
-    {"nl": "de fiets", "vr": "das Fahrrad"}
-  ],
-  "frans": [
-    {"nl": "de vakantie", "vr": "les vacances"},
-    {"nl": "de fiets", "vr": "le vélo"}
-  ],
-  "engels": [
-    {"nl": "de vakantie", "vr": "holiday"},
-    {"nl": "fiets", "vr": "bicycle"}
-  ]
-}
+[
+  {"lang":"duits" ,"nl": "de vakantie", "vr": "der Urlaub"},
+  {"lang":"duits" ,"nl": "de fiets", "vr": "das Fahrrad"},
+  {"lang":"frans" ,"nl": "de vakantie", "vr": "les vacances"},
+  {"lang":"frans" ,"nl": "de fiets", "vr": "le vélo"},
+  {"lang":"engels" ,"nl": "vakantie", "vr": "holiday"},
+  {"lang":"engels" ,"nl": "fiets", "vr": "bicycle"}
+
+]
