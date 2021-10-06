@@ -19,7 +19,6 @@ import java.util.Random;
 @Slf4j
 public class SimpleUiController {
 
-    private final HostServices hostServices;
     private final WoordenService woordenService;
 
     @FXML
@@ -49,7 +48,7 @@ public class SimpleUiController {
     private String getRandomWoord() {
         Random random = new Random();
         int index = random.nextInt(woorden.size());
-        return woorden.get(index).getVreemd();
+        return woorden.get(index).getNederlands();
     }
 
     private void populateTalen() {
