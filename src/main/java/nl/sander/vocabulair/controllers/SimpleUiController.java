@@ -40,17 +40,22 @@ public class SimpleUiController {
 
     @FXML
     public void initialize() {
+        woorden = woordenService.getWoordenVoorTaal("frans");
+        populateLabel();
         populateTalen();
         populateKnoppen();
-        woorden = woordenService.getWoordenVoorTaal("frans");
+    }
+
+    private void populateLabel(){
+        gekozenWoord = getRandomWoord();
+        this.labellinks.setText(gekozenWoord.getNederlands());
+        this.labelrechts.setText("");
     }
 
     private void populateKnoppen() {
         this.next.setOnAction(
                 actionEvent -> {
-                    gekozenWoord = getRandomWoord();
-                    this.labellinks.setText(gekozenWoord.getNederlands());
-                    this.labelrechts.setText("");
+                    populateLabel();
                 }
         );
         this.show.setOnAction(
