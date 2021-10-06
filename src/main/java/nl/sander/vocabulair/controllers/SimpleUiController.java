@@ -1,6 +1,5 @@
 package nl.sander.vocabulair.controllers;
 
-import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -22,33 +21,49 @@ public class SimpleUiController {
     private final WoordenService woordenService;
 
     @FXML
-    public Label label;
+    public Label labellinks;
 
     @FXML
-    public Button button;
+    public Label labelrechts;
+
+    @FXML
+    public Button next;
+
+    @FXML
+    public Button show;
 
     @FXML
     public ChoiceBox<String> talen;
 
     private List<Woord> woorden;
+    private Woord gekozenWoord;
 
     @FXML
     public void initialize() {
         populateTalen();
-        populateKnop();
+        populateKnoppen();
         woorden = woordenService.getWoordenVoorTaal("frans");
-
-        log.debug("woorden: {}", woorden);
     }
 
-    private void populateKnop() {
-        this.button.setOnAction(actionEvent -> this.label.setText(getRandomWoord()));
+    private void populateKnoppen() {
+        this.next.setOnAction(
+                actionEvent -> {
+                    gekozenWoord = getRandomWoord();
+                    this.labellinks.setText(gekozenWoord.getNederlands());
+                    this.labelrechts.setText("");
+                }
+        );
+        this.show.setOnAction(
+                actionEvent -> {
+                    this.labelrechts.setText(gekozenWoord.getVreemd());
+                }
+        );
     }
 
-    private String getRandomWoord() {
+    private Woord getRandomWoord() {
         Random random = new Random();
         int index = random.nextInt(woorden.size());
-        return woorden.get(index).getNederlands();
+        return woorden.get(index);
     }
 
     private void populateTalen() {

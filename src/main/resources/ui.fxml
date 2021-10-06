@@ -23,10 +23,11 @@
      </rowConstraints>
       <children>
           <ChoiceBox fx:id="talen" prefWidth="150.0" />
-         <ToggleButton contentDisplay="TOP" mnemonicParsing="false" selected="true" text="actief" GridPane.columnIndex="1" />
-          <Label fx:id="label" prefHeight="169.0" prefWidth="304.0" GridPane.rowIndex="1" />
-          <Button fx:id="button" text="knopje" GridPane.rowIndex="3" />
-         <Label GridPane.columnIndex="1" GridPane.rowIndex="1" />
+          <ToggleButton contentDisplay="TOP" mnemonicParsing="false" selected="true" text="actief" GridPane.columnIndex="1" />
+          <Label fx:id="labellinks" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+          <Label fx:id="labelrechts" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+          <Button fx:id="next" text="next" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+          <Button fx:id="show" text="show me" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </children>
    </GridPane>
 </VBox>

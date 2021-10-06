@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import nl.sander.vocabulair.events.StageReadyEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
