@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.layout.VBox?>
-<VBox fx:controller="nl.sander.vocabulair.controllers.SimpleUiController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <Button fx:id="button" text="knopje"></Button>
-    <Label fx:id="label" text="label"></Label>
+<VBox xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.sander.vocabulair.controllers.SimpleUiController">
+    <Label fx:id="label" text="label" />
+    <Button fx:id="button" text="knopje" />
 </VBox>

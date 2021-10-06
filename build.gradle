@@ -4,6 +4,7 @@ plugins {
 	id 'java'
 	id 'application'
 	id 'org.openjfx.javafxplugin' version '0.0.10'
+	id 'org.beryx.jlink' version '2.24.1'
 }
 
 javafx {
@@ -13,11 +14,23 @@ javafx {
 
 group = 'nl.sander'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+//sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
+	}
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(11)
+	}
+}
+
+jlink {
+	launcher {
+		name = 'hellofx'
 	}
 }
 
