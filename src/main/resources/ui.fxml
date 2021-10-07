@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.sander.vocabulair.controllers.SimpleUiController">
    <GridPane>
-     <columnConstraints>
-       <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="10.0" prefWidth="102.0" />
-       <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="98.0" />
-     </columnConstraints>
-     <rowConstraints>
-       <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-       <RowConstraints maxHeight="47.0" minHeight="8.0" prefHeight="34.0" vgrow="SOMETIMES" />
-       <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-     </rowConstraints>
+
       <children>
           <Button fx:id="file" mnemonicParsing="false" text="Kies file" GridPane.columnIndex="0" GridPane.rowIndex="0" />
           <Label fx:id="filelabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-          <Label fx:id="labellinks" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+          <Label fx:id="labellinks" GridPane.columnIndex="0" GridPane.rowIndex="1" />
           <Label fx:id="labelrechts" GridPane.columnIndex="1" GridPane.rowIndex="1" />
           <Button fx:id="next" text="next" GridPane.columnIndex="0" GridPane.rowIndex="3" />
           <Button fx:id="show" text="show me" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       </children>
+      <columnConstraints>
+         <ColumnConstraints prefWidth="150.0" />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints prefHeight="40.0" />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
    </GridPane>
 </VBox>
