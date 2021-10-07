@@ -76,6 +76,10 @@ public class SimpleUiController {
     private Woord getRandomWoord() {
         Random random = new Random();
         int index = random.nextInt(woorden.size());
+        Woord nieuwWoord = woorden.get(index);
+        if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord)) {
+            return getRandomWoord();
+        }
         return woorden.get(index);
     }
 
