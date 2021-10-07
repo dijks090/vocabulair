@@ -45,7 +45,6 @@ public class SimpleUiController {
 
     @FXML
     public void initialize() {
-//        populateLabel();
         populateKnoppen();
     }
 
@@ -66,6 +65,7 @@ public class SimpleUiController {
                     if(selectedFile != null) {
                         filelabel.setText(selectedFile.getName());
                         woorden = woordenService.getWoorden(selectedFile);
+                        populateLabel();
                     } else {
                         log.debug("File is not valid!");
                     }
