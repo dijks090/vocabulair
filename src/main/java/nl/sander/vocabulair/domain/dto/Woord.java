@@ -1,13 +1,11 @@
 package nl.sander.vocabulair.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class Woord {
-    @JsonProperty("nl")
     private String nederlands;
-    @JsonProperty("vr")
     private String vreemd;
-    private String lang;
 }
