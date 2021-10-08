@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 import nl.sander.vocabulair.events.StageReadyEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 
 @Component
+@Slf4j
 public class StageListener implements ApplicationListener<StageReadyEvent> {
 
     private final String title;
@@ -23,8 +25,9 @@ public class StageListener implements ApplicationListener<StageReadyEvent> {
 
     public StageListener(
             @Value("${spring.application.ui.title}") String title,
-            @Value("classpath:/ui.fxml") Resource fxmlResource,
+            @Value("classpath:/nieuw.fxml") Resource fxmlResource,
             ApplicationContext applicationContext) {
+        log.debug("stagelistener");
         this.title = title;
         this.fxmlResource = fxmlResource;
         this.applicationContext = applicationContext;
@@ -38,7 +41,7 @@ public class StageListener implements ApplicationListener<StageReadyEvent> {
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             fxmlLoader.setControllerFactory(applicationContext::getBean);
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 400, 100);
+            Scene scene = new Scene(root, 400, 200);
             stage.setScene(scene);
             stage.setTitle(title);
             stage.show();

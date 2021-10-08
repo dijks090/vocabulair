@@ -1,9 +1,7 @@
 package nl.sander.vocabulair.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +10,7 @@ import nl.sander.vocabulair.domain.dto.Woord;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +28,16 @@ public class SimpleUiController {
     public TextField labelrechts;
 
     @FXML
-    public Button file;
+    public MenuBar menuBar;
+
+    @FXML
+    public Menu menu;
+
+    @FXML
+    public MenuItem open;
+
+    @FXML
+    public MenuItem quit;
 
     @FXML
     public Label filelabel;
@@ -46,6 +54,7 @@ public class SimpleUiController {
 
     @FXML
     public void initialize() {
+        log.debug("initialize");
         populateKnoppen();
     }
 
@@ -58,13 +67,14 @@ public class SimpleUiController {
     private void populateKnoppen() {
         this.next.setOnAction(actionEvent -> populateLabel());
         this.show.setOnAction(actionEvent -> this.labelrechts.setText(gekozenWoord.getVreemd()));
-        this.file.setOnAction(
+        this.quit.setOnAction(actionEvent -> System.exit(0));
+        this.open.setOnAction(
                 actionEvent -> {
                     FileChooser fc = new FileChooser();
                     fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT files", "*.txt"));
                     selectedFile = fc.showOpenDialog(null);
                     if(selectedFile != null) {
-                        filelabel.setText(selectedFile.getName());
+                        filelabel.setText(Arrays.stream(selectedFile.getName().split(".")).findFirst().get());
                         woorden = woordenService.getWoorden(selectedFile);
                         populateLabel();
                     } else {
