@@ -28,9 +28,15 @@
             <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
+        <Menu mnemonicParsing="false" text="Type oefening">
+          <items>
+            <MenuItem fx:id="actief" mnemonicParsing="false" text="actief" />
+            <MenuItem fx:id="schrijven" mnemonicParsing="false" text="schrijven" />
+          </items>
+        </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="Hellup?" />
+            <MenuItem mnemonicParsing="false" text="Vraag je vader..?" />
           </items>
         </Menu>
       </menus>

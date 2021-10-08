@@ -1,6 +1,6 @@
 Todo
 
-- gebruik txt files
-- vette letters
+- actief/passief
+- schrijven
 - file of locatie onthouden
 - 
