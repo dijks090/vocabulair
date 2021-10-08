@@ -28,9 +28,9 @@ public class SoundService {
             Clip audioClip = AudioSystem.getClip();
             audioClip.open(audioStream);
             audioClip.start();
-            throw new RuntimeException();
         } catch (Exception e) {
             log.error("Error opening audio", e);
+            throw new RuntimeException();
         }
     }
 
