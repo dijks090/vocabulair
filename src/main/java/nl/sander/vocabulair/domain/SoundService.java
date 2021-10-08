@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import static javax.sound.sampled.AudioSystem.getClip;
 
@@ -34,7 +35,6 @@ public class SoundService {
     }
 
     public Resource loadResource() {
-        return resourceLoader.getResource(
-                "classpath:sounds/cheer/1.wav");
+        return resourceLoader.getResource(String.format("classpath:sounds/cheer/%d.wav", new Random().nextInt(6)));
     }
 }
