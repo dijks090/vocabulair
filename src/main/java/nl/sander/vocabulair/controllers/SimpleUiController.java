@@ -20,33 +20,26 @@ import java.util.Random;
 public class SimpleUiController {
 
     private final WoordenService woordenService;
-
     @FXML
     public TextField labellinks;
-
     @FXML
     public TextField labelrechts;
-
     @FXML
     public MenuBar menuBar;
-
     @FXML
     public Menu menu;
-
     @FXML
     public MenuItem open;
-
     @FXML
     public MenuItem quit;
-
     @FXML
     public Label filelabel;
-
     @FXML
     public Button next;
-
     @FXML
     public Button show;
+    @FXML
+    public CheckBox skip;
 
     private List<Woord> woorden;
     private Woord gekozenWoord;
@@ -58,14 +51,18 @@ public class SimpleUiController {
         populateKnoppen();
     }
 
-    private void populateLabel(){
+    private void populateLabel() {
         gekozenWoord = getRandomWoord();
         this.labellinks.setText(gekozenWoord.getNederlands());
         this.labelrechts.setText("");
     }
 
     private void populateKnoppen() {
-        this.next.setOnAction(actionEvent -> populateLabel());
+        this.next.setOnAction(actionEvent -> {
+            gekozenWoord.setSkip(skip.isSelected());
+            skip.setSelected(false);
+            populateLabel();
+        });
         this.show.setOnAction(actionEvent -> this.labelrechts.setText(gekozenWoord.getVreemd()));
         this.quit.setOnAction(actionEvent -> System.exit(0));
         this.open.setOnAction(
@@ -82,6 +79,7 @@ public class SimpleUiController {
                     }
                 }
         );
+//        this.skip.setOnAction(actionEvent -> {});
     }
 
     private Woord getRandomWoord() {
