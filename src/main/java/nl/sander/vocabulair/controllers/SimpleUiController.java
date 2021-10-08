@@ -3,6 +3,7 @@ package nl.sander.vocabulair.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,10 +23,10 @@ public class SimpleUiController {
     private final WoordenService woordenService;
 
     @FXML
-    public Label labellinks;
+    public TextField labellinks;
 
     @FXML
-    public Label labelrechts;
+    public TextField labelrechts;
 
     @FXML
     public Button file;
@@ -60,7 +61,7 @@ public class SimpleUiController {
         this.file.setOnAction(
                 actionEvent -> {
                     FileChooser fc = new FileChooser();
-                    fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSV files", "*.csv"));
+                    fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT files", "*.txt"));
                     selectedFile = fc.showOpenDialog(null);
                     if(selectedFile != null) {
                         filelabel.setText(selectedFile.getName());
