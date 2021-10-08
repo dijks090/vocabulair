@@ -74,7 +74,7 @@ public class SimpleUiController {
                     fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT files", "*.txt"));
                     selectedFile = fc.showOpenDialog(null);
                     if(selectedFile != null) {
-                        filelabel.setText(Arrays.stream(selectedFile.getName().split(".")).findFirst().get());
+                        filelabel.setText("Je oefent nu: " + selectedFile.getName().split("\\.")[0].toUpperCase());
                         woorden = woordenService.getWoorden(selectedFile);
                         populateLabel();
                     } else {
@@ -85,10 +85,13 @@ public class SimpleUiController {
     }
 
     private Woord getRandomWoord() {
+        if (woorden.stream().allMatch(Woord::isSkip)){
+            return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").build();
+        }
         Random random = new Random();
         int index = random.nextInt(woorden.size());
         Woord nieuwWoord = woorden.get(index);
-        if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord)) {
+        if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord) || nieuwWoord.isSkip()) {
             return getRandomWoord();
         }
         return woorden.get(index);

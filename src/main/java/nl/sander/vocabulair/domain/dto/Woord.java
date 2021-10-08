@@ -8,4 +8,5 @@ import lombok.Data;
 public class Woord {
     private String nederlands;
     private String vreemd;
+    private boolean skip;
 }

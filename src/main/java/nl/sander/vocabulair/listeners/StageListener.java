@@ -25,7 +25,7 @@ public class StageListener implements ApplicationListener<StageReadyEvent> {
 
     public StageListener(
             @Value("${spring.application.ui.title}") String title,
-            @Value("classpath:/nieuw.fxml") Resource fxmlResource,
+            @Value("classpath:/ui.fxml") Resource fxmlResource,
             ApplicationContext applicationContext) {
         log.debug("stagelistener");
         this.title = title;
