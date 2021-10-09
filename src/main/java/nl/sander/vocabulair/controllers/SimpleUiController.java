@@ -130,7 +130,7 @@ public class SimpleUiController {
 
     @AllArgsConstructor
     public enum TypeOefening {
-        ACTIEF("actief", "Show me"), SCHRIJVEN("schrijven", "Controleer");
+        ACTIEF("actief", "show me"), SCHRIJVEN("schrijven", "controleer");
 
         private String naam;
         private String knopLabel;
