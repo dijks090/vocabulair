@@ -1,7 +1,14 @@
 package nl.sander.vocabulair.controllers;
 
+import javafx.animation.Animation;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +18,8 @@ import nl.sander.vocabulair.services.WoordenService;
 import nl.sander.vocabulair.domain.Woord;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
+import javax.imageio.stream.FileImageInputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Random;
 
@@ -48,16 +56,20 @@ public class SimpleUiController {
     public MenuItem actief;
     @FXML
     public MenuItem schrijven;
+    @FXML
+    public ImageView imageview;
 
     private List<Woord> woorden;
     private Woord gekozenWoord;
     private File selectedFile;
     private TypeOefening typeOefing = TypeOefening.ACTIEF;
+    private boolean alldone = false;
 
     @FXML
     public void initialize() {
         log.debug("initialize");
         populateKnoppen();
+        alert();
     }
 
     private void populateLabel() {
@@ -117,6 +129,7 @@ public class SimpleUiController {
 
     private Woord getRandomWoord() {
         if (woorden.stream().allMatch(Woord::isSkip)){
+            toonAnimatie();
             return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").build();
         }
         Random random = new Random();
@@ -126,6 +139,30 @@ public class SimpleUiController {
             return getRandomWoord();
         }
         return woorden.get(index);
+    }
+
+    private void toonAnimatie() {
+        Image image = new Image("https://i.giphy.com/JRQ1PegFVKXBu.gif");
+        imageview.setImage(image);
+        imageview.setVisible(true);
+    }
+
+    private void alert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        //Setting the title
+        alert.setTitle("Alert");
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        //Setting the content of the dialog
+        alert.setContentText("This is a confirmmation alert");
+        //Adding buttons to the dialog pane
+        alert.getDialogPane().getButtonTypes().add(type);
+        Image image = new Image("https://i.giphy.com/JRQ1PegFVKXBu.gif");
+//        alert.getDialogPane().setGraphic(image);
+        //Setting the label
+        Text txt = new Text("Click the button to show the dialog");
+        Font font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12);
+        txt.setFont(font);
+        alert.showAndWait();
     }
 
     @AllArgsConstructor
