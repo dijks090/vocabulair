@@ -49,7 +49,7 @@ public class SimpleUiController {
     @FXML
     public MenuItem schrijven;
 
-    private List<Woord> woorden;
+    private List<Woord> woorden = List.of();
     private Woord gekozenWoord;
     private File selectedFile;
     private TypeOefening typeOefing = TypeOefening.ACTIEF;
@@ -64,6 +64,16 @@ public class SimpleUiController {
         gekozenWoord = getRandomWoord();
         this.labellinks.setText(gekozenWoord.getNederlands());
         this.labelrechts.setText("");
+        long aantalToGo = woorden
+                .stream()
+                .filter(woord -> !woord.isSkip())
+                .count();
+
+        this.filelabel.setText(
+                format("Je oefent nu %s, %s. Nog %d te gaan",
+                        selectedFile.getName().split("\\.")[0].toUpperCase(),
+                        typeOefing.naam,
+                        aantalToGo));
     }
 
     private void populateKnoppen() {
@@ -111,7 +121,6 @@ public class SimpleUiController {
     }
 
     private void updateKnopTeksten() {
-        filelabel.setText(format("Je oefent nu %s, %s", selectedFile.getName().split("\\.")[0].toUpperCase(), typeOefing.naam));
         show.setText(typeOefing.knopLabel);
     }
 
