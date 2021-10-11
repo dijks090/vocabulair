@@ -1,9 +1,9 @@
-package nl.sander.vocabulair.domain;
+package nl.sander.vocabulair.services;
 
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import nl.sander.vocabulair.domain.dto.Woord;
+import nl.sander.vocabulair.domain.Woord;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -30,6 +30,8 @@ public class WoordenService {
             csvReader.close();
             return list
                     .stream()
+                    .filter(item -> item.length == 2)
+                    .filter(strings -> !strings[0].isEmpty() && !strings[1].isEmpty())
                     .map(strings -> Woord.builder().nederlands(strings[0]).vreemd(strings[1]).build())
                     .collect(Collectors.toList());
 

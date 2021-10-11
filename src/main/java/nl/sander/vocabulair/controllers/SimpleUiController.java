@@ -6,9 +6,9 @@ import javafx.stage.FileChooser;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nl.sander.vocabulair.domain.SoundService;
-import nl.sander.vocabulair.domain.WoordenService;
-import nl.sander.vocabulair.domain.dto.Woord;
+import nl.sander.vocabulair.services.SoundService;
+import nl.sander.vocabulair.services.WoordenService;
+import nl.sander.vocabulair.domain.Woord;
 import org.springframework.stereotype.Component;
 
 import java.io.File;

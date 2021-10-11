@@ -46,6 +46,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
 	testImplementation 'io.projectreactor:reactor-test:3.4.10'
 	testImplementation 'org.springframework:spring-test'
+	testImplementation("org.assertj:assertj-core:3.11.1")
 }
 
 test {

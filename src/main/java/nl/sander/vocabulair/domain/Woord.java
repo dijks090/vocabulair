@@ -1,4 +1,4 @@
-package nl.sander.vocabulair.domain.dto;
+package nl.sander.vocabulair.domain;
 
 import lombok.Builder;
 import lombok.Data;

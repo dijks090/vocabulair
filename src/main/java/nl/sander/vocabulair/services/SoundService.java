@@ -1,4 +1,4 @@
-package nl.sander.vocabulair.domain;
+package nl.sander.vocabulair.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,12 +6,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.util.Random;
-
-import static javax.sound.sampled.AudioSystem.getClip;
 
 @Service
 @Slf4j
