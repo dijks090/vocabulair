@@ -59,7 +59,7 @@ public class SimpleUiController {
     private List<Woord> woorden = List.of();
     private Woord gekozenWoord;
     private File selectedFile;
-    private TypeOefening typeOefing = TypeOefening.ACTIEF;
+    private TypeOefening typeOefing = TypeOefening.SCHRIJVEN;
     Random random = new Random();
 
     @FXML
@@ -131,6 +131,7 @@ public class SimpleUiController {
 
     private void updateKnopTeksten() {
         show.setText(typeOefing.knopLabel);
+        labelrechts.setDisable(typeOefing.invullenDisabled);
     }
 
     private Woord getRandomWoord() {
@@ -155,10 +156,12 @@ public class SimpleUiController {
 
     @AllArgsConstructor
     public enum TypeOefening {
-        ACTIEF("actief", "show me"), SCHRIJVEN("schrijven", "controleer");
+        ACTIEF("actief", "show me", true),
+        SCHRIJVEN("schrijven", "controleer", false);
 
         private String naam;
         private String knopLabel;
+        private boolean invullenDisabled;
     }
 
 }
