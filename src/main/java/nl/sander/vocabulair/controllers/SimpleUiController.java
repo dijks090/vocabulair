@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nl.sander.vocabulair.domain.Woord;
+import nl.sander.vocabulair.services.GiphyService;
 import nl.sander.vocabulair.services.SoundService;
 import nl.sander.vocabulair.services.WoordenService;
 import org.springframework.stereotype.Component;
@@ -24,8 +25,7 @@ import static java.lang.String.format;
 @Slf4j
 public class SimpleUiController {
 
-    private final SoundService soundService;
-    private final WoordenService woordenService;
+
     @FXML
     public TextField labellinks;
     @FXML
@@ -53,6 +53,9 @@ public class SimpleUiController {
     @FXML
     public ImageView imageview;
 
+    private final SoundService soundService;
+    private final WoordenService woordenService;
+    private final GiphyService giphyService;
     private List<Woord> woorden = List.of();
     private Woord gekozenWoord;
     private File selectedFile;
@@ -63,7 +66,6 @@ public class SimpleUiController {
     public void initialize() {
         log.debug("initialize");
         populateKnoppen();
-        toonAnimatie();
     }
 
     private void populateLabel() {
@@ -146,7 +148,7 @@ public class SimpleUiController {
     }
 
     private void toonAnimatie() {
-        Image image = new Image("https://i.giphy.com/JRQ1PegFVKXBu.gif");
+        Image image = new Image(giphyService.getGiphyUrl());
         imageview.setImage(image);
         imageview.setVisible(true);
     }
