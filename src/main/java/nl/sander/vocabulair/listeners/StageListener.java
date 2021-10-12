@@ -41,7 +41,7 @@ public class StageListener implements ApplicationListener<StageReadyEvent> {
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             fxmlLoader.setControllerFactory(applicationContext::getBean);
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, 400, 200);
+            Scene scene = new Scene(root, 500, 500);
             stage.setScene(scene);
             stage.setTitle(title);
             stage.show();

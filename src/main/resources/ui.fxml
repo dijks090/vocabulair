@@ -52,6 +52,7 @@
           <Button fx:id="next" text="next" GridPane.columnIndex="0" GridPane.rowIndex="3" />
           <Button fx:id="show" text="show me" GridPane.columnIndex="1" GridPane.rowIndex="3" />
           <CheckBox fx:id="skip" text="skip" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+          <ImageView fx:id="imageview" GridPane.columnIndex="0"  GridPane.rowIndex="5"/>
         </children>
         <columnConstraints>
           <ColumnConstraints prefWidth="150.0" />
@@ -64,10 +65,6 @@
           <RowConstraints />
         </rowConstraints>
       </GridPane>
-      <VBox>
-        <ImageView fx:id="imageview"/>
-<!--        <Alert></Alert>-->
-      </VBox>
     </AnchorPane>
 
   </children>

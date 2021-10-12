@@ -1,29 +1,23 @@
 package nl.sander.vocabulair.controllers;
 
-import javafx.animation.Animation;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import nl.sander.vocabulair.domain.Woord;
 import nl.sander.vocabulair.services.SoundService;
 import nl.sander.vocabulair.services.WoordenService;
-import nl.sander.vocabulair.domain.Woord;
 import org.springframework.stereotype.Component;
 
-import javax.imageio.stream.FileImageInputStream;
-import java.io.*;
+import java.io.File;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 @Component
 @RequiredArgsConstructor
@@ -63,13 +57,13 @@ public class SimpleUiController {
     private Woord gekozenWoord;
     private File selectedFile;
     private TypeOefening typeOefing = TypeOefening.ACTIEF;
-    private boolean alldone = false;
+    Random random = new Random();
 
     @FXML
     public void initialize() {
         log.debug("initialize");
         populateKnoppen();
-        alert();
+        toonAnimatie();
     }
 
     private void populateLabel() {
@@ -108,6 +102,7 @@ public class SimpleUiController {
         this.quit.setOnAction(actionEvent -> System.exit(0));
         this.open.setOnAction(
                 actionEvent -> {
+                    imageview.setVisible(false);
                     FileChooser fc = new FileChooser();
                     fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT files", "*.txt"));
                     selectedFile = fc.showOpenDialog(null);
@@ -141,7 +136,7 @@ public class SimpleUiController {
             toonAnimatie();
             return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").build();
         }
-        Random random = new Random();
+
         int index = random.nextInt(woorden.size());
         Woord nieuwWoord = woorden.get(index);
         if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord) || nieuwWoord.isSkip()) {
@@ -154,24 +149,6 @@ public class SimpleUiController {
         Image image = new Image("https://i.giphy.com/JRQ1PegFVKXBu.gif");
         imageview.setImage(image);
         imageview.setVisible(true);
-    }
-
-    private void alert() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        //Setting the title
-        alert.setTitle("Alert");
-        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-        //Setting the content of the dialog
-        alert.setContentText("This is a confirmmation alert");
-        //Adding buttons to the dialog pane
-        alert.getDialogPane().getButtonTypes().add(type);
-        Image image = new Image("https://i.giphy.com/JRQ1PegFVKXBu.gif");
-//        alert.getDialogPane().setGraphic(image);
-        //Setting the label
-        Text txt = new Text("Click the button to show the dialog");
-        Font font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 12);
-        txt.setFont(font);
-        alert.showAndWait();
     }
 
     @AllArgsConstructor
