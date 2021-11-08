@@ -92,7 +92,7 @@ public class SimpleUiController {
         });
         this.show.setOnAction(actionEvent -> {
             if (TypeOefening.SCHRIJVEN.equals(typeOefing)) {
-                if (gekozenWoord.getVreemd().equals(labelrechts.getText())) {
+                if (gekozenWoord.getVreemd().trim().equals(labelrechts.getText().trim())) {
                     log.debug("CORRECT");
                     soundService.cheer();
                     this.labelrechts.setText(gekozenWoord.getVreemd() + " " +Character.toString(10004));
