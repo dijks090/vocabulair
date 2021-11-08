@@ -95,11 +95,14 @@ public class SimpleUiController {
                 if (gekozenWoord.getVreemd().equals(labelrechts.getText())) {
                     log.debug("CORRECT");
                     soundService.cheer();
+                    this.labelrechts.setText(gekozenWoord.getVreemd() + " " +Character.toString(10004));
                 } else {
                     log.debug("FOUT");
+                    this.labelrechts.setText(gekozenWoord.getVreemd());
                 }
+            } else {
+                this.labelrechts.setText(gekozenWoord.getVreemd());
             }
-            this.labelrechts.setText(gekozenWoord.getVreemd());
         });
         this.quit.setOnAction(actionEvent -> System.exit(0));
         this.open.setOnAction(
