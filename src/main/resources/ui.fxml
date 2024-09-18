@@ -32,6 +32,7 @@
         <Menu mnemonicParsing="false" text="Type oefening">
           <items>
             <MenuItem fx:id="actief" mnemonicParsing="false" text="actief" />
+            <MenuItem fx:id="passief" mnemonicParsing="false" text="passief" />
             <MenuItem fx:id="schrijven" mnemonicParsing="false" text="schrijven" />
           </items>
         </Menu>

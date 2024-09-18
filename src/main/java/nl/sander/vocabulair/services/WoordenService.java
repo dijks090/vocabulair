@@ -33,7 +33,7 @@ public class WoordenService {
                     .filter(item -> item.length == 2)
                     .filter(strings -> !strings[0].isEmpty() && !strings[1].isEmpty())
                     .map(strings -> Woord.builder().nederlands(strings[0]).vreemd(strings[1]).build())
-                    .collect(Collectors.toList());
+                    .toList();
 
         } catch (Exception e) {
             throw new RuntimeException(e);

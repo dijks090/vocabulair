@@ -27,7 +27,7 @@ public class JavaFxApplication extends Application {
 		};
 
 		this.context = new SpringApplicationBuilder()
-				.sources(BootApplication.class)
+				.sources(VocabilairApplication.class)
 				.initializers(initializer)
 				.build()
 				.run(getParameters().getRaw().toArray(new String[0]));

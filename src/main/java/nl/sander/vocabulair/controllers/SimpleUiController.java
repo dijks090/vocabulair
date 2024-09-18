@@ -49,6 +49,8 @@ public class SimpleUiController {
     @FXML
     public MenuItem actief;
     @FXML
+    public MenuItem passief;
+    @FXML
     public MenuItem schrijven;
     @FXML
     public ImageView imageview;
@@ -68,9 +70,17 @@ public class SimpleUiController {
         populateKnoppen();
     }
 
+    private String getLinkerTekst(Woord woord) {
+        return typeOefing == TypeOefening.PASSIEF ? woord.getVreemd() : woord.getNederlands();
+    }
+
+    private String getRechterTekst(Woord woord) {
+        return typeOefing == TypeOefening.PASSIEF ? woord.getNederlands() : woord.getVreemd();
+    }
+
     private void populateLabel() {
         gekozenWoord = getRandomWoord();
-        this.labellinks.setText(gekozenWoord.getNederlands());
+        this.labellinks.setText(getLinkerTekst(gekozenWoord));
         this.labelrechts.setText("");
         long aantalToGo = woorden
                 .stream()
@@ -95,13 +105,13 @@ public class SimpleUiController {
                 if (gekozenWoord.getVreemd().trim().equals(labelrechts.getText().trim())) {
                     log.debug("CORRECT");
                     soundService.cheer();
-                    this.labelrechts.setText(gekozenWoord.getVreemd() + " " +Character.toString(10004));
+                    this.labelrechts.setText(getRechterTekst(gekozenWoord) + " " + Character.toString(10004));
                 } else {
                     log.debug("FOUT");
-                    this.labelrechts.setText(gekozenWoord.getVreemd() + " " +Character.toString(10006));
+                    this.labelrechts.setText(getRechterTekst(gekozenWoord) + " " + Character.toString(10006));
                 }
             } else {
-                this.labelrechts.setText(gekozenWoord.getVreemd());
+                this.labelrechts.setText(getRechterTekst(gekozenWoord));
             }
         });
         this.quit.setOnAction(actionEvent -> System.exit(0));
@@ -125,6 +135,11 @@ public class SimpleUiController {
             updateKnopTeksten();
             log.debug("actief");
         });
+        this.passief.setOnAction(actionEvent -> {
+            typeOefing = TypeOefening.PASSIEF;
+            updateKnopTeksten();
+            log.debug("passief");
+        });
         this.schrijven.setOnAction(actionEvent -> {
             typeOefing = TypeOefening.SCHRIJVEN;
             updateKnopTeksten();
@@ -138,17 +153,23 @@ public class SimpleUiController {
     }
 
     private Woord getRandomWoord() {
-        if (woorden.stream().allMatch(Woord::isSkip)){
+        var overgeblevenWoorden = woorden
+                .stream()
+                .filter(woord -> !woord.isSkip())
+                .toList();
+        if (overgeblevenWoorden.isEmpty()) {
             toonAnimatie();
             return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").build();
         }
-
-        int index = random.nextInt(woorden.size());
-        Woord nieuwWoord = woorden.get(index);
+        if (overgeblevenWoorden.size() == 1) {
+            return overgeblevenWoorden.get(0);
+        }
+        int index = random.nextInt(overgeblevenWoorden.size());
+        Woord nieuwWoord = overgeblevenWoorden.get(index);
         if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord) || nieuwWoord.isSkip()) {
             return getRandomWoord();
         }
-        return woorden.get(index);
+        return overgeblevenWoorden.get(index);
     }
 
     private void toonAnimatie() {
@@ -160,6 +181,7 @@ public class SimpleUiController {
     @AllArgsConstructor
     public enum TypeOefening {
         ACTIEF("actief", "show me", true),
+        PASSIEF("passief", "show me", true),
         SCHRIJVEN("schrijven", "controleer", false);
 
         private String naam;
