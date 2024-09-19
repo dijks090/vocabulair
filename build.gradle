@@ -25,6 +25,7 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
+	modularity.inferModulePath = true
 }
 
 jlink {
@@ -40,6 +41,11 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'com.opencsv:opencsv:5.9'
+	// JavaFX dependencies (if needed)
+	implementation 'org.openjfx:javafx-controls'
+	implementation 'org.openjfx:javafx-graphics'
+	implementation 'org.openjfx:javafx-fxml'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -51,3 +57,4 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
