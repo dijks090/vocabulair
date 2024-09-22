@@ -104,6 +104,7 @@ public class SimpleUiController {
                         selectedFile.getName().split("\\.")[0].toUpperCase(),
                         typeOefing.naam,
                         aantalToGo));
+        labelrechts.requestFocus();
     }
 
     private void show() {
@@ -138,11 +139,13 @@ public class SimpleUiController {
     private void next() {
         gekozenWoord.setSkip(false);
         populateLabel();
+        labelrechts.requestFocus();
     }
 
     private void skipAndNext() {
         gekozenWoord.setSkip(true);
         populateLabel();
+        labelrechts.requestFocus();
     }
 
     private void actief() {
@@ -189,7 +192,7 @@ public class SimpleUiController {
             return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").build();
         }
         if (overgeblevenWoorden.size() == 1) {
-            return overgeblevenWoorden.get(0);
+            return overgeblevenWoorden.getFirst();
         }
         int index = random.nextInt(overgeblevenWoorden.size());
         Woord nieuwWoord = overgeblevenWoorden.get(index);
