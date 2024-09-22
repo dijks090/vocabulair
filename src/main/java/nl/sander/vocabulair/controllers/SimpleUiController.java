@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.FileChooser;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -68,6 +69,17 @@ public class SimpleUiController {
     public void initialize() {
         log.debug("initialize");
         populateKnoppen();
+
+        // Get the scene after initialization and attach key event listener
+        next.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        show();
+                    }
+                });
+            }
+        });
     }
 
     private String getLinkerTekst(Woord woord) {
@@ -94,26 +106,28 @@ public class SimpleUiController {
                         aantalToGo));
     }
 
+    private void show() {
+        if (TypeOefening.SCHRIJVEN.equals(typeOefing)) {
+            if (gekozenWoord.getVreemd().trim().equals(labelrechts.getText().trim())) {
+                log.debug("CORRECT");
+                soundService.cheer();
+                this.labelrechts.setText(getRechterTekst(gekozenWoord) + " " + Character.toString(10004));
+            } else {
+                log.debug("FOUT");
+                this.labelrechts.setText(labelrechts.getText().trim() + " --> " + getRechterTekst(gekozenWoord) + " " + Character.toString(10006));
+            }
+        } else {
+            this.labelrechts.setText(getRechterTekst(gekozenWoord));
+        }
+    }
+
     private void populateKnoppen() {
         this.next.setOnAction(actionEvent -> {
             gekozenWoord.setSkip(skip.isSelected());
             skip.setSelected(false);
             populateLabel();
         });
-        this.show.setOnAction(actionEvent -> {
-            if (TypeOefening.SCHRIJVEN.equals(typeOefing)) {
-                if (gekozenWoord.getVreemd().trim().equals(labelrechts.getText().trim())) {
-                    log.debug("CORRECT");
-                    soundService.cheer();
-                    this.labelrechts.setText(getRechterTekst(gekozenWoord) + " " + Character.toString(10004));
-                } else {
-                    log.debug("FOUT");
-                    this.labelrechts.setText(labelrechts.getText().trim() + " --> " + getRechterTekst(gekozenWoord) + " " + Character.toString(10006));
-                }
-            } else {
-                this.labelrechts.setText(getRechterTekst(gekozenWoord));
-            }
-        });
+        this.show.setOnAction(actionEvent -> show());
         this.quit.setOnAction(actionEvent -> System.exit(0));
         this.open.setOnAction(
                 actionEvent -> {
