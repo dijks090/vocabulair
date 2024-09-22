@@ -46,7 +46,7 @@ public class SimpleUiController {
     @FXML
     public Button show;
     @FXML
-    public CheckBox skip;
+    public Button skipAndNext;
     @FXML
     public MenuItem actief;
     @FXML
@@ -136,8 +136,12 @@ public class SimpleUiController {
     }
 
     private void next() {
-        gekozenWoord.setSkip(skip.isSelected());
-        skip.setSelected(false);
+        gekozenWoord.setSkip(false);
+        populateLabel();
+    }
+
+    private void skipAndNext() {
+        gekozenWoord.setSkip(true);
         populateLabel();
     }
 
@@ -161,6 +165,7 @@ public class SimpleUiController {
 
     private void populateKnoppen() {
         this.next.setOnAction(actionEvent -> next());
+        this.skipAndNext.setOnAction(actionEvent -> skipAndNext());
         this.show.setOnAction(actionEvent -> show());
         this.quit.setOnAction(actionEvent -> System.exit(0));
         this.open.setOnAction(actionEvent -> open());

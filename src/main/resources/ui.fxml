@@ -51,8 +51,8 @@
           <TextField fx:id="labellinks" GridPane.columnIndex="0" GridPane.rowIndex="1" />
           <TextField fx:id="labelrechts" GridPane.columnIndex="1" GridPane.rowIndex="1" />
           <Button fx:id="next" text="next" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+          <Button fx:id="skipAndNext" text="skip and next" GridPane.columnIndex="0" GridPane.rowIndex="4" />
           <Button fx:id="show" text="show me" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-          <CheckBox fx:id="skip" text="skip" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
           <ImageView fx:id="imageview" GridPane.columnIndex="0"  GridPane.rowIndex="5"/>
         </children>
         <columnConstraints>
