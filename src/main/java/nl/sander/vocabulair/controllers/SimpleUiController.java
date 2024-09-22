@@ -108,7 +108,7 @@ public class SimpleUiController {
                     this.labelrechts.setText(getRechterTekst(gekozenWoord) + " " + Character.toString(10004));
                 } else {
                     log.debug("FOUT");
-                    this.labelrechts.setText(getRechterTekst(gekozenWoord) + " " + Character.toString(10006));
+                    this.labelrechts.setText(labelrechts.getText().trim() + " --> " + getRechterTekst(gekozenWoord) + " " + Character.toString(10006));
                 }
             } else {
                 this.labelrechts.setText(getRechterTekst(gekozenWoord));
