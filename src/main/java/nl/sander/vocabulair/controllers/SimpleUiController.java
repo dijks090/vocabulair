@@ -121,44 +121,52 @@ public class SimpleUiController {
         }
     }
 
-    private void populateKnoppen() {
-        this.next.setOnAction(actionEvent -> {
-            gekozenWoord.setSkip(skip.isSelected());
-            skip.setSelected(false);
+    private void open() {
+        imageview.setVisible(false);
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT files", "*.txt"));
+        selectedFile = fc.showOpenDialog(null);
+        if (selectedFile != null) {
+            updateKnopTeksten();
+            woorden = woordenService.getWoorden(selectedFile);
             populateLabel();
-        });
+        } else {
+            log.debug("File is not valid!");
+        }
+    }
+
+    private void next() {
+        gekozenWoord.setSkip(skip.isSelected());
+        skip.setSelected(false);
+        populateLabel();
+    }
+
+    private void actief() {
+        typeOefing = TypeOefening.ACTIEF;
+        updateKnopTeksten();
+        log.debug("actief");
+    }
+
+    private void passief() {
+        typeOefing = TypeOefening.PASSIEF;
+        updateKnopTeksten();
+        log.debug("passief");
+    }
+
+    private void schrijven() {
+        typeOefing = TypeOefening.SCHRIJVEN;
+        updateKnopTeksten();
+        log.debug("schrijven");
+    }
+
+    private void populateKnoppen() {
+        this.next.setOnAction(actionEvent -> next());
         this.show.setOnAction(actionEvent -> show());
         this.quit.setOnAction(actionEvent -> System.exit(0));
-        this.open.setOnAction(
-                actionEvent -> {
-                    imageview.setVisible(false);
-                    FileChooser fc = new FileChooser();
-                    fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("TXT files", "*.txt"));
-                    selectedFile = fc.showOpenDialog(null);
-                    if(selectedFile != null) {
-                        updateKnopTeksten();
-                        woorden = woordenService.getWoorden(selectedFile);
-                        populateLabel();
-                    } else {
-                        log.debug("File is not valid!");
-                    }
-                }
-        );
-        this.actief.setOnAction(actionEvent -> {
-            typeOefing = TypeOefening.ACTIEF;
-            updateKnopTeksten();
-            log.debug("actief");
-        });
-        this.passief.setOnAction(actionEvent -> {
-            typeOefing = TypeOefening.PASSIEF;
-            updateKnopTeksten();
-            log.debug("passief");
-        });
-        this.schrijven.setOnAction(actionEvent -> {
-            typeOefing = TypeOefening.SCHRIJVEN;
-            updateKnopTeksten();
-            log.debug("schrijven");
-        });
+        this.open.setOnAction(actionEvent -> open());
+        this.actief.setOnAction(actionEvent -> actief());
+        this.passief.setOnAction(actionEvent -> passief());
+        this.schrijven.setOnAction(actionEvent -> schrijven());
     }
 
     private void updateKnopTeksten() {
