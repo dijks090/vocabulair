@@ -5,6 +5,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -64,15 +67,23 @@ public class SimpleUiController {
     private File selectedFile;
     private TypeOefening typeOefing = TypeOefening.SCHRIJVEN;
     Random random = new Random();
+    private final KeyCombination ctrlN = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN);
+    private final KeyCombination ctrlS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+
 
     @FXML
     public void initialize() {
-        log.debug("initialize");
         populateKnoppen();
-
-        // Get the scene after initialization and attach key event listener
         next.sceneProperty().addListener((observable, oldScene, newScene) -> {
             if (newScene != null) {
+                newScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+                    if (ctrlN.match(event)) {
+                        next();
+                    }
+                    if (ctrlS.match(event)) {
+                        skipAndNext();
+                    }
+                });
                 newScene.setOnKeyPressed(event -> {
                     if (event.getCode() == KeyCode.ENTER) {
                         show();
@@ -108,13 +119,14 @@ public class SimpleUiController {
     }
 
     private void show() {
+        if (gekozenWoord == null) {
+            return;
+        }
         if (TypeOefening.SCHRIJVEN.equals(typeOefing)) {
             if (gekozenWoord.getVreemd().trim().equals(labelrechts.getText().trim())) {
-                log.debug("CORRECT");
                 soundService.cheer();
                 this.labelrechts.setText(getRechterTekst(gekozenWoord) + " " + Character.toString(10004));
             } else {
-                log.debug("FOUT");
                 this.labelrechts.setText(labelrechts.getText().trim() + " --> " + getRechterTekst(gekozenWoord) + " " + Character.toString(10006));
             }
         } else {
@@ -132,17 +144,23 @@ public class SimpleUiController {
             woorden = woordenService.getWoorden(selectedFile);
             populateLabel();
         } else {
-            log.debug("File is not valid!");
+            log.error("File is not valid!");
         }
     }
 
     private void next() {
+        if (gekozenWoord == null) {
+            return;
+        }
         gekozenWoord.setSkip(false);
         populateLabel();
         labelrechts.requestFocus();
     }
 
     private void skipAndNext() {
+        if (gekozenWoord == null) {
+            return;
+        }
         gekozenWoord.setSkip(true);
         populateLabel();
         labelrechts.requestFocus();
@@ -151,19 +169,16 @@ public class SimpleUiController {
     private void actief() {
         typeOefing = TypeOefening.ACTIEF;
         updateKnopTeksten();
-        log.debug("actief");
     }
 
     private void passief() {
         typeOefing = TypeOefening.PASSIEF;
         updateKnopTeksten();
-        log.debug("passief");
     }
 
     private void schrijven() {
         typeOefing = TypeOefening.SCHRIJVEN;
         updateKnopTeksten();
-        log.debug("schrijven");
     }
 
     private void populateKnoppen() {
@@ -214,9 +229,9 @@ public class SimpleUiController {
         PASSIEF("passief", "show me", true),
         SCHRIJVEN("schrijven", "controleer", false);
 
-        private String naam;
-        private String knopLabel;
-        private boolean invullenDisabled;
+        private final String naam;
+        private final String knopLabel;
+        private final boolean invullenDisabled;
     }
 
 }
