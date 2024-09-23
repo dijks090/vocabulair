@@ -44,7 +44,7 @@
       <GridPane>
 
         <children>
-          <Label fx:id="filelabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+          <Label fx:id="filelabel" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
           <TextField fx:id="labellinks" GridPane.columnIndex="0" GridPane.rowIndex="1" />
           <TextField fx:id="labelrechts" GridPane.columnIndex="1" GridPane.rowIndex="1" />
           <Button fx:id="next" text="_Next" mnemonicParsing="true"  GridPane.columnIndex="0" GridPane.rowIndex="3" />

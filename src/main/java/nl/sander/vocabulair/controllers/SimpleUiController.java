@@ -101,10 +101,7 @@ public class SimpleUiController {
         return typeOefing == TypeOefening.PASSIEF ? woord.getNederlands() : woord.getVreemd();
     }
 
-    private void populateLabel() {
-        gekozenWoord = getRandomWoord();
-        this.labellinks.setText(getLinkerTekst(gekozenWoord));
-        this.labelrechts.setText("");
+    private void setFileLabel() {
         long aantalToGo = woorden
                 .stream()
                 .filter(woord -> !woord.isSkip())
@@ -115,6 +112,14 @@ public class SimpleUiController {
                         selectedFile.getName().split("\\.")[0].toUpperCase(),
                         typeOefing.naam,
                         aantalToGo));
+
+    }
+
+    private void populateLabel() {
+        gekozenWoord = getRandomWoord();
+        this.labellinks.setText(getLinkerTekst(gekozenWoord));
+        this.labelrechts.setText("");
+        setFileLabel();
         labelrechts.requestFocus();
     }
 
@@ -195,6 +200,7 @@ public class SimpleUiController {
     private void updateKnopTeksten() {
         show.setText(typeOefing.knopLabel);
         labelrechts.setDisable(typeOefing.invullenDisabled);
+        setFileLabel();
     }
 
     private Woord getRandomWoord() {
