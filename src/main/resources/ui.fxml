@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <VBox prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.sander.vocabulair.controllers.SimpleUiController">
   <children>
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
@@ -47,11 +48,19 @@
           <Label fx:id="filelabel" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
           <TextField fx:id="labellinks" GridPane.columnIndex="0" GridPane.rowIndex="1" />
           <TextField fx:id="labelrechts" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-          <Button fx:id="next" text="_Next" mnemonicParsing="true"  GridPane.columnIndex="0" GridPane.rowIndex="3" />
-          <Button fx:id="skipAndNext" text="_Skip and next" mnemonicParsing="true"  GridPane.columnIndex="0" GridPane.rowIndex="4" />
-          <Button fx:id="show" text="show me" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-          <ImageView fx:id="imageview" GridPane.columnIndex="0"  GridPane.rowIndex="5"/>
+
+          <!-- Use HBox for flowing buttons -->
+          <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" spacing="10">
+            <children>
+              <Button fx:id="next" text="_Next"/>
+              <Button fx:id="skipAndNext" text="_Skip and next"/>
+              <Button fx:id="show" text="show me"/>
+            </children>
+          </HBox>
+
+          <ImageView fx:id="imageview" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
         </children>
+
         <columnConstraints>
           <ColumnConstraints prefWidth="230.0" />
           <ColumnConstraints prefWidth="230.0" />
