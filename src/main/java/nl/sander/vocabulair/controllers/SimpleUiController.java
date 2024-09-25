@@ -69,6 +69,7 @@ public class SimpleUiController {
     Random random = new Random();
     private final KeyCombination ctrlN = new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN);
     private final KeyCombination ctrlS = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+    private final KeyCombination ctrlW = new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN);
 
 
     @FXML
@@ -82,6 +83,9 @@ public class SimpleUiController {
                     }
                     if (ctrlS.match(event)) {
                         skipAndNext();
+                    }
+                    if (ctrlW.match(event)) {
+                        show();
                     }
                 });
                 newScene.setOnKeyPressed(event -> {
@@ -231,8 +235,8 @@ public class SimpleUiController {
 
     @AllArgsConstructor
     public enum TypeOefening {
-        ACTIEF("actief", "show me", true),
-        PASSIEF("passief", "show me", true),
+        ACTIEF("actief", "_shoW me", true),
+        PASSIEF("passief", "_shoW me", true),
         SCHRIJVEN("schrijven", "controleer", false);
 
         private final String naam;
