@@ -1,5 +1,6 @@
 package nl.sander.vocabulair.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -231,6 +233,24 @@ public class SimpleUiController {
         Image image = new Image(giphyService.getGiphyUrl());
         imageview.setImage(image);
         imageview.setVisible(true);
+    }
+
+    public void showHelpDialog(ActionEvent actionEvent) {
+        Alert helpDialog = new Alert(Alert.AlertType.INFORMATION);
+        helpDialog.initModality(Modality.APPLICATION_MODAL);
+        helpDialog.setTitle("Help");
+        helpDialog.setHeaderText("Shortcut Information");
+        helpDialog.setContentText(
+                """
+                        Gebruik deze shortcuts om snel te navigeren
+                        Linker Ctrl+n = Next
+                        Linker Ctrl+s = Skip and next
+                        Linker Ctrl+w = shoW me
+                        
+                        """
+        );
+
+        helpDialog.showAndWait();
     }
 
     @AllArgsConstructor

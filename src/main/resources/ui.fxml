@@ -36,9 +36,7 @@
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Linker Ctrl+n = Next | linker Ctrl+s = Skip en next" />
-          </items>
+          <MenuItem fx:id="helpMenuItem" text="Help" onAction="#showHelpDialog"/>
         </Menu>
       </menus>
     </MenuBar>
