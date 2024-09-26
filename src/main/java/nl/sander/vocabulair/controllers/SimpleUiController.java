@@ -69,8 +69,6 @@ public class SimpleUiController {
     @FXML
     private TableView<Woord> woordenTable;
     @FXML
-    public  TableColumn<Woord, Boolean> skipColumn;
-    @FXML
     public  TableColumn<Woord, Boolean> skapColumn;
     @FXML
     private TableColumn<Woord, String> nederlandsColumn;
@@ -127,7 +125,7 @@ public class SimpleUiController {
     private void setFileLabel() {
         long aantalToGo = woorden
                 .stream()
-                .filter(woord -> !woord.isSkip())
+                .filter(woord -> !woord.skapProperty().getValue())
                 .count();
 
         this.filelabel.setText(
@@ -174,8 +172,8 @@ public class SimpleUiController {
         } else {
             log.error("File is not valid!");
         }
-        skipColumn.setCellValueFactory(new PropertyValueFactory<>("skip"));
-        skipColumn.setCellFactory(tc -> {
+        skapColumn.setCellValueFactory(new PropertyValueFactory<>("skip"));
+        skapColumn.setCellFactory(tc -> {
             CheckBoxTableCell<Woord, Boolean> cell = new CheckBoxTableCell<>();
             cell.setEditable(true);
             return cell;
@@ -199,7 +197,7 @@ public class SimpleUiController {
         if (gekozenWoord == null) {
             return;
         }
-        gekozenWoord.setSkip(false);
+        gekozenWoord.getSkap().setValue(false);
         populateLabel();
         labelrechts.requestFocus();
     }
@@ -208,7 +206,7 @@ public class SimpleUiController {
         if (gekozenWoord == null) {
             return;
         }
-        gekozenWoord.setSkip(true);
+        gekozenWoord.getSkap().setValue(true);
         populateLabel();
         labelrechts.requestFocus();
     }
@@ -246,20 +244,21 @@ public class SimpleUiController {
     }
 
     private Woord getRandomWoord() {
+        imageview.setVisible(false);
         var overgeblevenWoorden = woorden
                 .stream()
-                .filter(woord -> !woord.isSkip())
+                .filter(woord -> !woord.getSkap().getValue().equals(Boolean.TRUE))
                 .toList();
         if (overgeblevenWoorden.isEmpty()) {
             toonAnimatie();
-            return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").build();
+            return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").skap(new SimpleBooleanProperty(true)).build();
         }
         if (overgeblevenWoorden.size() == 1) {
             return overgeblevenWoorden.getFirst();
         }
         int index = random.nextInt(overgeblevenWoorden.size());
         Woord nieuwWoord = overgeblevenWoorden.get(index);
-        if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord) || nieuwWoord.isSkip()) {
+        if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord) || nieuwWoord.getSkap().getValue().equals(Boolean.TRUE)) {
             return getRandomWoord();
         }
         return overgeblevenWoorden.get(index);

@@ -73,12 +73,7 @@
     <Tab text="woorden" closable="false" id="woordenTab">
       <TableView fx:id="woordenTable">
         <columns>
-          <TableColumn text="Skip" fx:id="skipColumn">
-            <cellValueFactory>
-              <PropertyValueFactory property="skip"/>
-            </cellValueFactory>
-          </TableColumn>
-          <TableColumn fx:id="skapColumn" text="Skap" />
+          <TableColumn fx:id="skapColumn" text="Skip" />
           <TableColumn text="Nederlands" fx:id="nederlandsColumn" prefWidth="230.0">
             <cellValueFactory>
               <PropertyValueFactory property="nederlands"/>
