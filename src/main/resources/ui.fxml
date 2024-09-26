@@ -14,59 +14,73 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.CustomMenuItem?>
-<VBox prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.sander.vocabulair.controllers.SimpleUiController">
-  <children>
-    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-      <menus>
-        <Menu fx:id="menu" mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem fx:id="open" mnemonicParsing="false" text="Open…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Type oefening">
-          <items>
-            <MenuItem fx:id="actief" mnemonicParsing="false" text="actief" />
-            <MenuItem fx:id="passief" mnemonicParsing="false" text="passief" />
-            <MenuItem fx:id="schrijven" mnemonicParsing="false" text="schrijven" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <MenuItem fx:id="helpMenuItem" text="Help" onAction="#showHelpDialog"/>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <GridPane>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.collections.FXCollections?>
+<?import nl.sander.vocabulair.domain.Woord?>
+<VBox prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="nl.sander.vocabulair.controllers.SimpleUiController">
+  <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+    <Menu fx:id="menu" mnemonicParsing="false" text="File">
+      <MenuItem fx:id="open" mnemonicParsing="false" text="Open…"/>
+      <SeparatorMenuItem mnemonicParsing="false"/>
+      <MenuItem mnemonicParsing="false" text="Preferences…"/>
+      <SeparatorMenuItem mnemonicParsing="false"/>
+      <MenuItem fx:id="quit" mnemonicParsing="false" text="Quit"/>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Type oefening">
+      <MenuItem fx:id="actief" mnemonicParsing="false" text="actief"/>
+      <MenuItem fx:id="passief" mnemonicParsing="false" text="passief"/>
+      <MenuItem fx:id="schrijven" mnemonicParsing="false" text="schrijven"/>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+      <MenuItem fx:id="helpMenuItem" text="Help" onAction="#showHelpDialog"/>
+    </Menu>
+  </MenuBar>
 
-        <columnConstraints>
-          <ColumnConstraints prefWidth="230.0"/>
-          <ColumnConstraints prefWidth="230.0"/>
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints/>
-          <RowConstraints prefHeight="40.0"/>
-          <RowConstraints/>
-          <RowConstraints/>
-        </rowConstraints>
-        <Label fx:id="filelabel" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
-        <TextField fx:id="labellinks" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField fx:id="labelrechts" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+  <TabPane>
+    <Tab text="oefenen" closable="false">
+      <AnchorPane VBox.vgrow="ALWAYS">
+        <GridPane>
+          <columnConstraints>
+            <ColumnConstraints prefWidth="230.0"/>
+            <ColumnConstraints prefWidth="230.0"/>
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints/>
+            <RowConstraints prefHeight="40.0"/>
+            <RowConstraints/>
+            <RowConstraints/>
+          </rowConstraints>
+          <Label fx:id="filelabel" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+          <TextField fx:id="labellinks" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+          <TextField fx:id="labelrechts" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <!-- Use HBox for flowing buttons -->
-        <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" spacing="10">
-          <Button fx:id="next" text="_Next"/>
-          <Button fx:id="skipAndNext" text="_Skip and next"/>
-          <Button fx:id="show" text="_shoW me"/>
-        </HBox>
+          <HBox GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" spacing="10">
+            <Button fx:id="next" text="_Next"/>
+            <Button fx:id="skipAndNext" text="_Skip and next"/>
+            <Button fx:id="show" text="_shoW me"/>
+          </HBox>
 
-        <ImageView fx:id="imageview" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
-      </GridPane>
-    </AnchorPane>
+          <ImageView fx:id="imageview" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+        </GridPane>
+      </AnchorPane>
+    </Tab>
+    <Tab text="woorden" closable="false" id="woordenTab">
+      <TableView fx:id="woordenTable">
+        <columns>
+          <TableColumn text="Word" fx:id="wordColumn">
+            <cellValueFactory>
+              <PropertyValueFactory property="nederlands"/>
+            </cellValueFactory>
+          </TableColumn>
+        </columns>
+      </TableView>
+    </Tab>
+  </TabPane>
 
-  </children>
+
 </VBox>

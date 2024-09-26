@@ -1,8 +1,11 @@
 package nl.sander.vocabulair.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -11,6 +14,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,6 +64,10 @@ public class SimpleUiController {
     public MenuItem schrijven;
     @FXML
     public ImageView imageview;
+    @FXML
+    private TableView<Woord> woordenTable;
+    @FXML
+    private TableColumn<Woord, String> wordColumn;
 
     private final SoundService soundService;
     private final WoordenService woordenService;
@@ -76,6 +84,7 @@ public class SimpleUiController {
 
     @FXML
     public void initialize() {
+
         populateKnoppen();
         next.sceneProperty().addListener((observable, oldScene, newScene) -> {
             if (newScene != null) {
@@ -157,6 +166,12 @@ public class SimpleUiController {
         } else {
             log.error("File is not valid!");
         }
+        wordColumn.setCellValueFactory(new PropertyValueFactory<>("nederlands"));
+        // Set up CheckBox cell for the first column
+        ObservableList<Woord> data = FXCollections.observableArrayList(woorden);
+        // Add data to the table
+        woordenTable.setItems(data);
+
     }
 
     private void next() {
