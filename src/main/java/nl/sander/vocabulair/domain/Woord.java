@@ -15,14 +15,9 @@ public class Woord {
     private String nederlands;
     private String vreemd;
     private boolean skip;
+    private BooleanProperty skap = new SimpleBooleanProperty(false);
 
-//        private BooleanProperty skip = new SimpleBooleanProperty(false);
-//
-//    public boolean isSkip() {
-//        return skip.get();
-//    }
-//
-//    public void setSkip(boolean skip) {
-//        this.skip.set(skip);
-//    }
+    public BooleanProperty skapProperty() {
+       return skap;
+    }
 }

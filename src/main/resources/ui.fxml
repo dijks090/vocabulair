@@ -21,6 +21,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.collections.FXCollections?>
 <?import nl.sander.vocabulair.domain.Woord?>
+<?import javafx.util.Callback?>
 <VBox prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="nl.sander.vocabulair.controllers.SimpleUiController">
   <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
@@ -77,6 +78,7 @@
               <PropertyValueFactory property="skip"/>
             </cellValueFactory>
           </TableColumn>
+          <TableColumn fx:id="skapColumn" text="Skap" />
           <TableColumn text="Nederlands" fx:id="nederlandsColumn" prefWidth="230.0">
             <cellValueFactory>
               <PropertyValueFactory property="nederlands"/>

@@ -3,6 +3,7 @@ package nl.sander.vocabulair.services;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import javafx.beans.property.SimpleBooleanProperty;
 import nl.sander.vocabulair.domain.Woord;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class WoordenService {
@@ -32,7 +32,7 @@ public class WoordenService {
                     .stream()
                     .filter(item -> item.length == 2)
                     .filter(strings -> !strings[0].isEmpty() && !strings[1].isEmpty())
-                    .map(strings -> Woord.builder().nederlands(strings[0]).vreemd(strings[1]).build())
+                    .map(strings -> Woord.builder().nederlands(strings[0]).vreemd(strings[1]).skap(new SimpleBooleanProperty(false)).build())
                     .toList();
 
         } catch (Exception e) {

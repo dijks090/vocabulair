@@ -1,5 +1,7 @@
 package nl.sander.vocabulair.controllers;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -68,6 +70,8 @@ public class SimpleUiController {
     private TableView<Woord> woordenTable;
     @FXML
     public  TableColumn<Woord, Boolean> skipColumn;
+    @FXML
+    public  TableColumn<Woord, Boolean> skapColumn;
     @FXML
     private TableColumn<Woord, String> nederlandsColumn;
     @FXML
@@ -176,6 +180,12 @@ public class SimpleUiController {
             cell.setEditable(true);
             return cell;
         });
+        // Ensure the cell value factory returns the BooleanProperty correctly.
+        skapColumn.setCellValueFactory(cellData -> cellData.getValue().skapProperty());
+
+        // Use the built-in CheckBoxTableCell to handle BooleanProperties.
+        skapColumn.setCellFactory(CheckBoxTableCell.forTableColumn(skapColumn));
+        skapColumn.setEditable(true);
         nederlandsColumn.setCellValueFactory(new PropertyValueFactory<>("nederlands"));
         vreemdColumn.setCellValueFactory(new PropertyValueFactory<>("vreemd"));
         // Set up CheckBox cell for the first column
