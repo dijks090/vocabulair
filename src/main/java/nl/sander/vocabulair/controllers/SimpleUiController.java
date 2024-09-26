@@ -14,7 +14,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +66,9 @@ public class SimpleUiController {
     @FXML
     private TableView<Woord> woordenTable;
     @FXML
-    private TableColumn<Woord, String> wordColumn;
+    private TableColumn<Woord, String> nederlandsColumn;
+    @FXML
+    public  TableColumn<Woord, String> vreemdColumn;
 
     private final SoundService soundService;
     private final WoordenService woordenService;
@@ -166,7 +167,8 @@ public class SimpleUiController {
         } else {
             log.error("File is not valid!");
         }
-        wordColumn.setCellValueFactory(new PropertyValueFactory<>("nederlands"));
+        nederlandsColumn.setCellValueFactory(new PropertyValueFactory<>("nederlands"));
+        vreemdColumn.setCellValueFactory(new PropertyValueFactory<>("vreemd"));
         // Set up CheckBox cell for the first column
         ObservableList<Woord> data = FXCollections.observableArrayList(woorden);
         // Add data to the table

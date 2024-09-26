@@ -72,7 +72,12 @@
     <Tab text="woorden" closable="false" id="woordenTab">
       <TableView fx:id="woordenTable">
         <columns>
-          <TableColumn text="Word" fx:id="wordColumn">
+          <TableColumn text="Nederlands" fx:id="nederlandsColumn">
+            <cellValueFactory>
+              <PropertyValueFactory property="nederlands"/>
+            </cellValueFactory>
+          </TableColumn>
+          <TableColumn text="Vreemde taal" fx:id="vreemdColumn">
             <cellValueFactory>
               <PropertyValueFactory property="nederlands"/>
             </cellValueFactory>
