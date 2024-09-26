@@ -77,12 +77,12 @@
               <PropertyValueFactory property="skip"/>
             </cellValueFactory>
           </TableColumn>
-          <TableColumn text="Nederlands" fx:id="nederlandsColumn">
+          <TableColumn text="Nederlands" fx:id="nederlandsColumn" prefWidth="230.0">
             <cellValueFactory>
               <PropertyValueFactory property="nederlands"/>
             </cellValueFactory>
           </TableColumn>
-          <TableColumn text="Vreemde taal" fx:id="vreemdColumn">
+          <TableColumn text="Vreemde taal" fx:id="vreemdColumn" prefWidth="230.0">
             <cellValueFactory>
               <PropertyValueFactory property="nederlands"/>
             </cellValueFactory>

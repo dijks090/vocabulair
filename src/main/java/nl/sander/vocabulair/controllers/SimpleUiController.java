@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -88,6 +89,7 @@ public class SimpleUiController {
     @FXML
     public void initialize() {
         populateKnoppen();
+        woordenTable.setEditable(true);
         next.sceneProperty().addListener((observable, oldScene, newScene) -> {
             if (newScene != null) {
                 newScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
@@ -169,6 +171,11 @@ public class SimpleUiController {
             log.error("File is not valid!");
         }
         skipColumn.setCellValueFactory(new PropertyValueFactory<>("skip"));
+        skipColumn.setCellFactory(tc -> {
+            CheckBoxTableCell<Woord, Boolean> cell = new CheckBoxTableCell<>();
+            cell.setEditable(true);
+            return cell;
+        });
         nederlandsColumn.setCellValueFactory(new PropertyValueFactory<>("nederlands"));
         vreemdColumn.setCellValueFactory(new PropertyValueFactory<>("vreemd"));
         // Set up CheckBox cell for the first column
