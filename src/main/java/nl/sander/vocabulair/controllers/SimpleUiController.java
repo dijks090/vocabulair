@@ -66,6 +66,8 @@ public class SimpleUiController {
     @FXML
     private TableView<Woord> woordenTable;
     @FXML
+    public  TableColumn<Woord, Boolean> skipColumn;
+    @FXML
     private TableColumn<Woord, String> nederlandsColumn;
     @FXML
     public  TableColumn<Woord, String> vreemdColumn;
@@ -85,7 +87,6 @@ public class SimpleUiController {
 
     @FXML
     public void initialize() {
-
         populateKnoppen();
         next.sceneProperty().addListener((observable, oldScene, newScene) -> {
             if (newScene != null) {
@@ -167,6 +168,7 @@ public class SimpleUiController {
         } else {
             log.error("File is not valid!");
         }
+        skipColumn.setCellValueFactory(new PropertyValueFactory<>("skip"));
         nederlandsColumn.setCellValueFactory(new PropertyValueFactory<>("nederlands"));
         vreemdColumn.setCellValueFactory(new PropertyValueFactory<>("vreemd"));
         // Set up CheckBox cell for the first column
