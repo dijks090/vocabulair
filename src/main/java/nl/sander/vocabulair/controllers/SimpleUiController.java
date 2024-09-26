@@ -1,6 +1,5 @@
 package nl.sander.vocabulair.controllers;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -69,7 +68,7 @@ public class SimpleUiController {
     @FXML
     private TableView<Woord> woordenTable;
     @FXML
-    public  TableColumn<Woord, Boolean> skapColumn;
+    public  TableColumn<Woord, Boolean> skipColumn;
     @FXML
     private TableColumn<Woord, String> nederlandsColumn;
     @FXML
@@ -125,7 +124,7 @@ public class SimpleUiController {
     private void setFileLabel() {
         long aantalToGo = woorden
                 .stream()
-                .filter(woord -> !woord.skapProperty().getValue())
+                .filter(woord -> !woord.skipProperty().getValue())
                 .count();
 
         this.filelabel.setText(
@@ -172,18 +171,18 @@ public class SimpleUiController {
         } else {
             log.error("File is not valid!");
         }
-        skapColumn.setCellValueFactory(new PropertyValueFactory<>("skip"));
-        skapColumn.setCellFactory(tc -> {
+        skipColumn.setCellValueFactory(new PropertyValueFactory<>("skip"));
+        skipColumn.setCellFactory(tc -> {
             CheckBoxTableCell<Woord, Boolean> cell = new CheckBoxTableCell<>();
             cell.setEditable(true);
             return cell;
         });
         // Ensure the cell value factory returns the BooleanProperty correctly.
-        skapColumn.setCellValueFactory(cellData -> cellData.getValue().skapProperty());
+        skipColumn.setCellValueFactory(cellData -> cellData.getValue().skipProperty());
 
         // Use the built-in CheckBoxTableCell to handle BooleanProperties.
-        skapColumn.setCellFactory(CheckBoxTableCell.forTableColumn(skapColumn));
-        skapColumn.setEditable(true);
+        skipColumn.setCellFactory(CheckBoxTableCell.forTableColumn(skipColumn));
+        skipColumn.setEditable(true);
         nederlandsColumn.setCellValueFactory(new PropertyValueFactory<>("nederlands"));
         vreemdColumn.setCellValueFactory(new PropertyValueFactory<>("vreemd"));
         // Set up CheckBox cell for the first column
@@ -197,7 +196,7 @@ public class SimpleUiController {
         if (gekozenWoord == null) {
             return;
         }
-        gekozenWoord.getSkap().setValue(false);
+        gekozenWoord.getSkip().setValue(false);
         populateLabel();
         labelrechts.requestFocus();
     }
@@ -206,7 +205,7 @@ public class SimpleUiController {
         if (gekozenWoord == null) {
             return;
         }
-        gekozenWoord.getSkap().setValue(true);
+        gekozenWoord.getSkip().setValue(true);
         populateLabel();
         labelrechts.requestFocus();
     }
@@ -247,18 +246,18 @@ public class SimpleUiController {
         imageview.setVisible(false);
         var overgeblevenWoorden = woorden
                 .stream()
-                .filter(woord -> !woord.getSkap().getValue().equals(Boolean.TRUE))
+                .filter(woord -> !woord.getSkip().getValue().equals(Boolean.TRUE))
                 .toList();
         if (overgeblevenWoorden.isEmpty()) {
             toonAnimatie();
-            return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").skap(new SimpleBooleanProperty(true)).build();
+            return Woord.builder().nederlands("Topper!").vreemd("alles gedaan!").skip(new SimpleBooleanProperty(true)).build();
         }
         if (overgeblevenWoorden.size() == 1) {
             return overgeblevenWoorden.getFirst();
         }
         int index = random.nextInt(overgeblevenWoorden.size());
         Woord nieuwWoord = overgeblevenWoorden.get(index);
-        if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord) || nieuwWoord.getSkap().getValue().equals(Boolean.TRUE)) {
+        if (gekozenWoord != null && gekozenWoord.equals(nieuwWoord) || nieuwWoord.getSkip().getValue().equals(Boolean.TRUE)) {
             return getRandomWoord();
         }
         return overgeblevenWoorden.get(index);

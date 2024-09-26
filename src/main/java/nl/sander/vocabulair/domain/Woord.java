@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 public class Woord {
     private String nederlands;
     private String vreemd;
-    private BooleanProperty skap = new SimpleBooleanProperty(false);
+    private BooleanProperty skip = new SimpleBooleanProperty(false);
 
-    public BooleanProperty skapProperty() {
-       return skap;
+    public BooleanProperty skipProperty() {
+       return skip;
     }
 }
